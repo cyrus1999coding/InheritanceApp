@@ -4,7 +4,26 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Dog myDog = new Dog();
+            myDog.Bark();
+            myDog.Eat();
+
+        }
+    }
+
+    class Animal
+    {
+        public  void Eat()
+        {
+            Console.WriteLine("Eating ...");
+        }
+    }
+
+    class Dog : Animal
+    {
+        public void Bark()
+        {
+            Console.WriteLine("Barking ...");
         }
     }
 }
