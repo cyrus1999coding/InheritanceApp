@@ -4,39 +4,54 @@
     {
         static void Main(string[] args)
         {
-
-            BaseClass baseClass = new BaseClass();
-            baseClass.ShowFields();
-
-            DerivedClass derivedClass = new DerivedClass();
-            derivedClass.AccessFields();
-            derivedClass.ShowFields();
-
-            Console.ReadKey();
+            Dog myDog = new Dog();
+            myDog.MakeSound();
+            
+            
+            Cat myCat = new Cat();
+            myCat.MakeSound();
+            
         }
     }
 
-    class BaseClass
+    class Animal
     {
-        public int publicField;
-
-        protected int _protectedField;
-        private int _privateField;
-
-        public void ShowFields()
+        public void Eat()
         {
-            Console.WriteLine($"Public: {publicField}, Protected: {_protectedField}," +
-                $" Private: {_privateField}");
+            Console.WriteLine("Eating ...");
+        }
+
+        public virtual void MakeSound()
+        {
+            Console.WriteLine("Animal makes a generic sound");
         }
     }
 
-    class DerivedClass : BaseClass
+    class Dog : Animal
     {
-        public void AccessFields()
-        { 
-            publicField = 1;
-            _protectedField = 2;
-            //_privateField = 3;
+        public override void MakeSound()
+        {
+            Console.WriteLine("Barking ...");
         }
     }
+
+    
+    class Cat : Animal
+    {
+        public override void MakeSound()
+        {
+            Console.WriteLine("Cat is miauing");
+        }
+    }
+    
+
+
+    // A breed of dog
+    //class Collie : Dog
+    //{
+    //    public void GoingNuts() 
+    //    {
+    //        Console.WriteLine("Coolie going Nuts");
+    //    }
+    //}
 }
