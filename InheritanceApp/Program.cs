@@ -4,45 +4,39 @@
     {
         static void Main(string[] args)
         {
-            Dog myDog = new Dog();
-            myDog.Bark();
-            myDog.Eat();
 
+            BaseClass baseClass = new BaseClass();
+            baseClass.ShowFields();
+
+            DerivedClass derivedClass = new DerivedClass();
+            derivedClass.AccessFields();
+            derivedClass.ShowFields();
+
+            Console.ReadKey();
         }
     }
 
-    class Animal
+    class BaseClass
     {
-        public  void Eat()
+        public int publicField;
+
+        protected int _protectedField;
+        private int _privateField;
+
+        public void ShowFields()
         {
-            Console.WriteLine("Eating ...");
+            Console.WriteLine($"Public: {publicField}, Protected: {_protectedField}," +
+                $" Private: {_privateField}");
         }
     }
 
-    class Dog : Animal
+    class DerivedClass : BaseClass
     {
-        public void Bark()
-        {
-            Console.WriteLine("Barking ...");
+        public void AccessFields()
+        { 
+            publicField = 1;
+            _protectedField = 2;
+            //_privateField = 3;
         }
     }
-
-
-    class Cat : Animal
-    {
-        public void Miau()
-        {
-            Console.WriteLine("Cat is miauing");
-        }
-    }
-
-
-    // A breed of dog
-    //class Collie : Dog
-    //{
-    //    public void GoingNuts() 
-    //    {
-    //        Console.WriteLine("Coolie going Nuts");
-    //    }
-    //}
 }
