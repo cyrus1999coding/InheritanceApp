@@ -8,7 +8,9 @@
             //joe.DisplayEmployeeInfo();
 
             Manager carl = new Manager("Carl", 45, "Manger", 123123, 7);
-            carl.DisplayManagerInfo();
+            //carl.DisplayManagerInfo();
+
+            Console.WriteLine(carl.ToString());
 
             Console.ReadKey();
         }
