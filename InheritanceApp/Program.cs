@@ -4,55 +4,37 @@
     {
         static void Main(string[] args)
         {
-            Dog myDog = new Dog();
-            myDog.MakeSound();
-            
-            
-            Cat myCat = new Cat();
-            myCat.MakeSound();
-            
-        }
-    }
+            Employee joe = new Employee("Joe", 36);
+            joe.DisplayPersonInfo();
 
-    class Animal
-    {
-        public void Eat()
-        {
-            Console.WriteLine("Eating ...");
-        }
-
-        public virtual void MakeSound()
-        {
-            Console.WriteLine("Animal makes a generic sound");
-        }
-    }
-
-    class Dog : Animal
-    {
-        public override void MakeSound()
-        {
-            base.MakeSound();
-            Console.WriteLine("Barking ...");
+            Console.ReadKey();
         }
     }
 
     
-    class Cat : Animal
+    public class Person
     {
-        public override void MakeSound()
+        public string Name { get; private set; }
+        public int Age { get; set; }
+
+        public Person(string name, int age)
         {
-            Console.WriteLine("Cat is miauing");
+            Name = name;
+            Age = age;
+            Console.WriteLine("Person Constructor called");
+        }
+
+        public void DisplayPersonInfo()
+        {
+            Console.WriteLine($"Name: {Name}, Age: {Age}");
         }
     }
-    
 
-
-    // A breed of dog
-    //class Collie : Dog
-    //{
-    //    public void GoingNuts() 
-    //    {
-    //        Console.WriteLine("Coolie going Nuts");
-    //    }
-    //}
+    public class Employee : Person
+    {
+        public Employee(string name, int age) : base(name, age) 
+        {
+            Console.WriteLine("Employee (Derived Class) Construtor called !");
+        }
+    }
 }
