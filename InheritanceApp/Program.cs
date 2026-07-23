@@ -1,13 +1,23 @@
-﻿namespace InheritanceApp
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace InheritanceApp
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            SavingAccount mySavings = new SavingAccount("123123123", 500.00m);
+            mySavings.Deposit(200.00m);
+            mySavings.Withdraw(100.00m);
+            mySavings.Withdraw(700.00m); // Should show insufficient funds message
+
+            /*
             //Employee joe = new Employee("Joe", 36, "Sales Rep", 1234);
             //joe.DisplayEmployeeInfo();
 
-            Manager carl = new Manager("Carl", 45, "Manger", 123123, 7);
+            Manager carl = new Manager("Carl", 45, "Manager", 123123, 7);
             //carl.DisplayManagerInfo();
             carl.BecomeOlder(5);
 
@@ -16,15 +26,68 @@
             Console.WriteLine(carl.ToString());
 
             Console.ReadKey();
+            */
         }
     }
 
+    public class Account
+    {
+        public string AccountNumber { get; private set; }
+        public decimal Balance { get; private set; }
 
+        public Account(string accountNumber, decimal initialBalance)
+        {
+            AccountNumber = accountNumber;
+            Balance = initialBalance;
+        }
+
+        public void Deposit(decimal amount)
+        {
+            Balance += amount;
+            Console.WriteLine($"Deposited {amount:C}. New balance is {Balance:C}.");
+        }
+
+        public virtual void Withdraw(decimal amount)
+        {
+            if (amount <= Balance)
+            {
+                Balance -= amount;
+                Console.WriteLine($"Withdraw {amount:C}. New balance is {Balance:C}.");
+            }
+            else
+            {
+                Console.WriteLine("Insufficient funds.");
+            }
+        }
+    }
+
+    public sealed class SavingAccount : Account
+    {
+        public SavingAccount(string accountNumber, decimal initialBalance)
+            : base(accountNumber, initialBalance)
+        {
+
+        }
+
+        public override void Withdraw(decimal amount)
+        {
+            // Saving account specific withdrawal logic, e.g., no overdrafts allowed
+            if (amount <= Balance)
+            {
+                base.Withdraw(amount);
+            }
+            else
+            {
+                Console.WriteLine("Insufficient funds. Cannot withdraw from a saving account.");
+            }
+        }
+    }
+
+    /*
     public class Person
     {
         public string Name { get; private set; }
         public int Age { get; private set; }
-
 
         public Person(string name, int age)
         {
@@ -50,21 +113,22 @@
         }
     }
 
-    public class Employee : Person
+    public sealed class Employee : Person
     {
         public string JobTitle { get; private set; }
         public int EmployeeID { get; private set; }
-        public Employee(string name, int age, string jobTitle, int employeeID) : base(name, age)
+
+        public Employee(string name, int age, string jobTitle, int employeeID)
+            : base(name, age)
         {
             JobTitle = jobTitle;
             EmployeeID = employeeID;
 
-            Console.WriteLine("Employee (Derived Class) Construtor called !");
+            Console.WriteLine("Employee (Derived Class) Constructor called!");
         }
 
         public void DisplayEmployeeInfo()
         {
-
             DisplayPersonInfo();
             Console.WriteLine($"Job title: {JobTitle}, EmployeeID: {EmployeeID}");
         }
@@ -74,16 +138,17 @@
     {
         public int TeamSize { get; private set; }
 
-        public Manager(string name, int age, string jobTitle, int employeeID, int teamSize) : base(name, age, jobTitle, employeeID)
+        public Manager(string name, int age, string jobTitle, int employeeID, int teamSize)
+            : base(name, age, jobTitle, employeeID)
         {
             TeamSize = teamSize;
         }
 
         public void DisplayManagerInfo()
         {
-
             DisplayEmployeeInfo();
             Console.WriteLine($"Team size: {TeamSize}");
         }
     }
+    */
 }
