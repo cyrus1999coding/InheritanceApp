@@ -26,4 +26,23 @@
             Console.WriteLine("Barking ...");
         }
     }
+
+
+    class Cat : Animal
+    {
+        public void Miau()
+        {
+            Console.WriteLine("Cat is miauing");
+        }
+    }
+
+
+    // A breed of dog
+    //class Collie : Dog
+    //{
+    //    public void GoingNuts() 
+    //    {
+    //        Console.WriteLine("Coolie going Nuts");
+    //    }
+    //}
 }
